@@ -3,16 +3,34 @@ const currentYear = new Date().getFullYear();
 ---
 
 <a
-              href={`https://wa.me/`}
-              target="_blank"
-              rel="noopener noreferrer"
-              class="fixed bottom-5 right-5 bg-green-500 text-white font-bold py-4 px-6 rounded-xl shadow-lg hover:bg-green-600 transition-all duration-300"
-            >
-              WhatsApp
-            </a>
-<footer class="w-full  border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 py-8 px-4 flex flex-col items-center justify-center text-sm text-gray-600 dark:text-gray-400">
-  
-  <div class="flex flex-col md:flex-row items-center space-x-0 md:space-x-4 space-y-2 md:space-y-0"
-  ><div>© {currentYear} Pura Vida Expediciones</div><a href="https://www.instagram.com/puravidaexpediciones/" target="_blank" rel="noopener noreferrer" class="hover:text-pink-500 mx-8">
-  <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" class="h-5 w-5"><path d="M7.75 2h8.5A5.75 5.75 0 0 1 22 7.75v8.5A5.75 5.75 0 0 1 16.25 22h-8.5A5.75 5.75 0 0 1 2 16.25v-8.5A5.75 5.75 0 0 1 7.75 2zm0 1.5A4.25 4.25 0 0 0 3.5 7.75v8.5A4.25 4.25 0 0 0 7.75 20.5h8.5a4.25 4.25 0 0 0 4.25-4.25v-8.5A4.25 4.25 0 0 0 16.25 3.5h-8.5zM12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10zm0 1.5a3.5 3.5 0 1 0 0 7 3.5 3.5 0 0 0 0-7zm5.25-.88a.88.88 0 1 1 0 1.75.88.88 0 0 1 0-1.75z"></path></svg></a>
-  <a href="https://fieldsmarshall.com" target="_blank" rel="noopener noreferrer" class="hover:underline"> Diseño - Fields Marshall</a></div></footer>
+  href={`https://wa.me/`}
+  target="_blank"
+  rel="noopener noreferrer"
+  class="fixed bottom-5 right-5 bg-green-500 text-white font-bold py-4 px-6 rounded-xl shadow-lg hover:bg-green-600 transition-all duration-300"
+>
+  WhatsApp
+</a>
+
+<footer class="w-full border-gray-200 dark:border-gray-700 bg-gray-900 py-8 px-4 flex flex-col items-center justify-center text-sm text-gray-400">
+  <div class="flex flex-col items-center space-y-4">
+    <div class="text-base">© {currentYear} Pura Vida Expediciones</div>
+    
+    <div class="flex items-center space-x-6">
+      <a href="https://www.instagram.com/puravidaexpediciones/" target="_blank" rel="noopener noreferrer" class="hover:text-pink-500 transition-colors duration-300">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" class="h-7 w-7">
+          <path d="M7.75 2h8.5A5.75 5.75 0 0 1 22 7.75v8.5A5.75 5.75 0 0 1 16.25 22h-8.5A5.75 5.75 0 0 1 2 16.25v-8.5A5.75 5.75 0 0 1 7.75 2zm0 1.5A4.25 4.25 0 0 0 3.5 7.75v8.5A4.25 4.25 0 0 0 7.75 20.5h8.5a4.25 4.25 0 0 0 4.25-4.25v-8.5A4.25 4.25 0 0 0 16.25 3.5h-8.5zM12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10zm0 1.5a3.5 3.5 0 1 0 0 7 3.5 3.5 0 0 0 0-7zm5.25-.88a.88.88 0 1 1 0 1.75.88.88 0 0 1 0-1.75z"></path>
+        </svg>
+      </a>
+
+      <a href="https://www.facebook.com/puravidaexpediciones/" target="_blank" rel="noopener noreferrer" class="hover:text-blue-600 transition-colors duration-300">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" class="h-7 w-7">
+          <path d="M12 2.04c-5.52 0-9.96 4.44-9.96 9.96 0 4.99 3.66 9.12 8.44 9.88v-6.98h-2.54v-2.9h2.54v-2.22c0-2.51 1.49-3.88 3.73-3.88 1.08 0 2.21.19 2.21.19v2.43h-1.25c-1.23 0-1.61.76-1.61 1.55v1.87h2.73l-.44 2.9h-2.29v6.98c4.78-.76 8.44-4.89 8.44-9.88C21.96 6.48 17.52 2.04 12 2z"></path>
+        </svg>
+      </a>
+    </div>
+    
+    <a href="https://fieldsmarshall.com" target="_blank" rel="noopener noreferrer" class="text-xs hover:underline opacity-70 mt-2">
+      Diseño - Fields Marshall
+    </a>
+  </div>
+</footer>
