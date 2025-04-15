@@ -1,7 +1,14 @@
 ---
-const { props, locale } = Astro.props;
-const testimonials = props.testimonials;
-const title = props.testimonialstitle[locale];
+const props = Astro.props || {};
+console.log('Props passed to Testimonials component:', props);
+const testimonials = props.testimonials || [
+  {
+    image: '/public/img/default.jpg',
+    name: 'Default Name',
+    location: 'Default Location',
+    quote: 'Default quote.'
+  }
+];
 ---
 
 <section
@@ -10,7 +17,7 @@ const title = props.testimonialstitle[locale];
 >
   <div class="container mx-auto px-4 text-center">
     <h2 class="text-3xl font-bold mb-6 text-gray-900 dark:text-gray-100 capitalize">
-      {title}
+      Testimonials
     </h2>
 
     <div class="relative max-w-3xl mx-auto" id="testimonial-display">
@@ -24,7 +31,7 @@ const title = props.testimonialstitle[locale];
         id="testimonial-quote"
         class="text-lg italic text-gray-700 dark:text-gray-300 mt-4"
       >
-        &ldquo;{testimonials[0].quote[locale]}&rdquo;
+        &ldquo;{testimonials[0].quote}&rdquo;
       </blockquote>
       <div class="mt-4">
         <p
@@ -43,7 +50,7 @@ const title = props.testimonialstitle[locale];
     </div>
 
     <div class="flex justify-center space-x-2 mt-6">
-      {testimonials.map((_, index) => (
+      {testimonials.map((_: any, index: number) => (
         <button
           type="button"
           class={`h-3 w-3 rounded-full transition-colors ${index === 0 ? "bg-blue-500" : "bg-gray-400 dark:bg-gray-600"}`}
@@ -55,8 +62,6 @@ const title = props.testimonialstitle[locale];
 
   <script type="module">
     const testimonials = JSON.parse(`{JSON.stringify(testimonials)}`);
-    const locale = `{locale}`;
-
     let currentIndex = 0;
     const image = document.getElementById("testimonial-image");
     const quote = document.getElementById("testimonial-quote");
@@ -68,7 +73,7 @@ const title = props.testimonialstitle[locale];
       const t = testimonials[index];
       image.src = t.image;
       image.alt = t.name;
-      quote.innerHTML = `&ldquo;${t.quote[locale]}&rdquo;`;
+      quote.innerHTML = `&ldquo;${t.quote}&rdquo;`;
       name.textContent = t.name;
       location.textContent = t.location;
 

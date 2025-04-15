@@ -1,48 +1,73 @@
 # Astro Starter Kit: Basics
 
-```sh
-npm create astro@latest -- --template basics
-```
+#TODO add open graph
+SEO title and meta tags and descriptions
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/astro/tree/latest/examples/basics)
-[![Open with CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/p/sandbox/github/withastro/astro/tree/latest/examples/basics)
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/withastro/astro?devcontainer_path=.devcontainer/basics/devcontainer.json)
+Here's a **basic SEO on-site checklist** you can use as a quick reference — perfect for making sure your site covers the essentials:
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+---
 
-![just-the-basics](https://github.com/withastro/astro/assets/2244813/a0a5533c-a856-4198-8470-2d67b1d7c554)
+testiomonials
 
-## 🚀 Project Structure
+## ✅ Basic On-Site SEO Checklist
 
-Inside of your Astro project, you'll see the following folders and files:
+### 🔤 **Content & Structure**
 
-```text
-/
-├── public/
-│   └── favicon.svg
-├── src/
-│   ├── layouts/
-│   │   └── Layout.astro
-│   └── pages/
-│       └── index.astro
-└── package.json
-```
+- [ ] Unique `<title>` tag for every page (50–60 characters)
+- [ ] Clear and compelling `<meta description>` (150–160 characters)
+- [ ] One `<h1>` tag per page, using target keywords
+- [ ] Logical use of `<h2>`, `<h3>`, etc. for subheadings
+- [ ] High-quality, original content (use keywords naturally)
+- [ ] Internal links between relevant pages
+- [ ] Outbound links to credible sources (optional but helpful)
 
-To learn more about the folder structure of an Astro project, refer to [our guide on project structure](https://docs.astro.build/en/basics/project-structure/).
+---
 
-## 🧞 Commands
+### 🌍 **URLs & Navigation**
 
-All commands are run from the root of the project, from a terminal:
+- [ ] SEO-friendly URLs (short, lowercase, hyphen-separated)
+  - ✅ Example: `/yoga-retreats-costa-rica`
+- [ ] Descriptive anchor text for links
+- [ ] XML sitemap submitted to Google Search Console
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+---
 
-## 👀 Want to learn more?
+### 🖼️ **Images**
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+- [ ] All images have descriptive `alt` text
+- [ ] File sizes optimized for fast loading (under 200 KB if possible)
+- [ ] Use modern formats like WebP for better performance
+
+---
+
+### 📱 **Mobile & Speed**
+
+- [ ] Responsive design (works on all screen sizes)
+- [ ] Pages load in under 2–3 seconds
+- [ ] Minimal use of large scripts or animations
+- [ ] Use a CDN (like Cloudflare) for faster delivery
+
+---
+
+### 🔒 **Technical Setup**
+
+- [ ] SSL certificate enabled (site uses `https://`)
+- [ ] Set canonical tags to avoid duplicate content
+- [ ] No broken links or 404 pages
+- [ ] Clean robots.txt file (no accidental blocking of content)
+- [ ] Structured data/schema markup added (for rich snippets)
+
+---
+
+### 🧰 **Tools & Testing**
+
+- [ ] Google Search Console connected
+- [ ] Google Analytics or another tracking tool installed
+- [ ] Test site with:
+  - [Google PageSpeed Insights](https://pagespeed.web.dev/)
+  - [Mobile-Friendly Test](https://search.google.com/test/mobile-friendly)
+  - [Facebook Sharing Debugger](https://developers.facebook.com/tools/debug/)
+
+---
+
+Want this as a downloadable PDF or editable Google Doc? I can generate that too!

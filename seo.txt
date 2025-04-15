@@ -1,0 +1,25 @@
+# SEO Titles and Meta Descriptions
+
+## Home Page
+Title: "Pura Vida Expediciones - Explore Peru and Chile"
+Meta Description: "Discover the beauty of Peru and Chile with Pura Vida Expediciones. Plan your next adventure with us!"
+
+## About Page
+Title: "About Us - Pura Vida Expediciones"
+Meta Description: "Learn about Pura Vida Expediciones, our mission, and our commitment to providing unforgettable adventures."
+
+## Trips Page
+Title: "Our Trips - Pura Vida Expediciones"
+Meta Description: "Explore our curated trips to Peru and Chile. Find the perfect adventure for you."
+
+## Trip Details Page
+Title: "{Trip Name} - Pura Vida Expediciones"
+Meta Description: "Discover details about {Trip Name}, including highlights, dates, and pricing."
+
+## Testimonials Page
+Title: "Testimonials - Pura Vida Expediciones"
+Meta Description: "Read what our customers have to say about their experiences with Pura Vida Expediciones."
+
+## Contact Page
+Title: "Contact Us - Pura Vida Expediciones"
+Meta Description: "Get in touch with Pura Vida Expediciones. We are here to help you plan your next adventure."

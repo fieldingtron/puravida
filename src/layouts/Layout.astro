@@ -1,6 +1,10 @@
 ---
 export interface Props {
   siteName: string;
+  seo?: {
+    title: string;
+    description: string;
+  };
 }
 import siteConfig from '../config/siteConfig.js';
 const siteName = siteConfig.siteName || "Pura Vida Expediciones";
@@ -11,6 +15,9 @@ import "../styles/global.css";
 import "aos/dist/aos.css";
 import Analytics from '@vercel/analytics/astro';
 
+const { seo } = Astro.props;
+const pageTitle = seo?.title || siteName;
+const pageDescription = seo?.description || siteConfig.siteDescription;
 ---
 
 <!doctype html>
@@ -27,7 +34,8 @@ import Analytics from '@vercel/analytics/astro';
     </script>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>{siteName}</title>
+    <title>{pageTitle}</title>
+    <meta name="description" content={pageDescription} />
     <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="shortcut icon" href="/favicon.ico" />

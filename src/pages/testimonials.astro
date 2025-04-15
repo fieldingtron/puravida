@@ -8,12 +8,35 @@ import FAQ from "../components/FAQ.astro";
 import Contact from "../components/Contact.astro";
 import Mission from "../components/Mission.astro";
 import Leadership from "../components/Leadership.astro";
-import Testimonial from "../components/Testimonial.astro";
+import TestimonialsComponent from "../components/Testimonials.astro";
+
+const seo = {
+  title: "Testimonials - Pura Vida Expediciones",
+  description: "Read what our customers have to say about their experiences with Pura Vida Expediciones.",
+};
+
+const testimonials = [
+  {
+    image: '/public/img/testimonial1.jpg',
+    name: 'John Doe',
+    location: 'New York, USA',
+    quote: "This was the best experience of my life!"
+     
+  },
+  {
+    image: '/public/img/testimonial2.jpg',
+    name: 'Jane Smith',
+    location: 'London, UK',
+      quote: "This was the best experience of my life!"
+  }
+];
+
+
 ---
 
-<Layout >
+<Layout siteName="Pura Vida Expediciones" seo={seo}>
+  <TestimonialsComponent testimonials={testimonials} />
   <Photos />
   <FAQ />
   <Contact />
-  <Testimonial />
 </Layout>

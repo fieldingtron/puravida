@@ -5,13 +5,18 @@ import AboutUs from "../components/AboutUs.astro";
 import OurTrips from "../components/OurTrips.astro";
 import Photos from "../components/Photos.astro";
 import FAQ from "../components/FAQ.astro";
-import Contact from "../components/Contact.astro";
+import ContactComponent from "../components/Contact.astro";
 import Mission from "../components/Mission.astro";
 import Leadership from "../components/Leadership.astro";
+
+const seo = {
+  title: "Contact Us - Pura Vida Expediciones",
+  description: "Get in touch with Pura Vida Expediciones. We are here to help you plan your next adventure.",
+};
 ---
 
-<Layout >
-  <Contact />
+<Layout siteName="Pura Vida Expediciones" seo={seo}>
+  <ContactComponent />
   <Photos />
   <FAQ />
 </Layout>

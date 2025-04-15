@@ -6,9 +6,14 @@ import OurTrips from "../components/OurTrips.astro";
 import Photos from "../components/Photos.astro";
 import FAQ from "../components/FAQ.astro";
 import Contact from "../components/Contact.astro";
+
+const seo = {
+  title: "Our Trips - Pura Vida Expediciones",
+  description: "Explore our curated trips to Peru and Chile. Find the perfect adventure for you.",
+};
 ---
 
-<Layout >
+<Layout siteName="Pura Vida Expediciones" seo={seo}>
   <OurTrips />
   <Photos />
   <FAQ />

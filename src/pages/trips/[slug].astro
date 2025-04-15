@@ -28,9 +28,14 @@ const { trip } = Astro.props;
 if (!trip) {
   throw new Error("Trip not found");
 }
+
+const seo = {
+  title: trip.title + " - Pura Vida Expediciones",
+  description: trip.description,
+};
 ---
 
-<Layout siteName={trip.name}>
+<Layout siteName={trip.name} seo={seo}>
   <section class="container mx-auto px-4 py-4">
     <div class="p-6 mt-5 lg:mb-0 lg:mx-4">
       <h1 class="text-4xl font-bold text-center">{trip.name}</h1>
