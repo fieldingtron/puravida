@@ -18,7 +18,8 @@
     "axios": "^1.8.4",
     "cheerio": "^1.0.0",
     "dotenv": "^16.4.7",
-    "glightbox": "^3.3.0"
+    "glightbox": "^3.3.0",
+    "resend": "^4.2.0"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.20",
