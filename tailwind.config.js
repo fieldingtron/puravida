@@ -14,7 +14,7 @@ module.exports = {
     },
     extend: {
       backgroundImage: (theme) => ({
-        //"martin-pescador": "url('/img/martin-pescador.png')",
+        lines: "url('/puravidalogo.png')",
         araucaria: "url('/img/araucarias1_bckgr.png')",
       }),
 
