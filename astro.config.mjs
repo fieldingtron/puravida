@@ -1,16 +1,10 @@
 import { defineConfig } from "astro/config";
+import vercel from "@astrojs/vercel/serverless"; // or "@astrojs/vercel/edge"
 import tailwind from "@astrojs/tailwind";
 import mdx from "@astrojs/mdx";
-import vercelStatic from "@astrojs/vercel/static";
 
-// https://astro.build/config
 export default defineConfig({
-  output: "static", // enables SSR & API support
-  adapter: vercelStatic(), // Vercel adapter for deployment
+  output: "server", // enables API routes
+  adapter: vercel(),
   integrations: [tailwind(), mdx()],
-  build: {
-    rollupOptions: {
-      external: ["resend"],
-    },
-  },
 });

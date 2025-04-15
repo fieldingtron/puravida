@@ -3,6 +3,9 @@ import Layout from "../../layouts/Layout.astro";
 import FAQ from "../../components/FAQ.astro";
 import Contact from "../../components/Contact.astro";
 
+export const prerender = true;
+
+
 export async function getStaticPaths() {
   const tripEntries = await import.meta.glob("../../content/trips/*.mdx", {
     eager: true,
