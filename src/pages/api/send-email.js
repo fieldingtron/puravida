@@ -6,28 +6,21 @@ export const config = {
   runtime: "edge",
 };
 
-export default async function handler(req) {
-  if (req.method === "GET") {
-    return new Response(JSON.stringify({ message: "Too high" }), {
-      status: 200,
-      headers: { "Content-Type": "application/json" },
-    });
-  }
+export async function GET() {
+  return new Response(JSON.stringify({ message: "Too high" }), {
+    status: 200,
+    headers: { "Content-Type": "application/json" },
+  });
+}
 
-  if (req.method !== "POST") {
-    return new Response(JSON.stringify({ message: "Method not allowed" }), {
-      status: 405,
-      headers: { "Content-Type": "application/json" },
-    });
-  }
-
+export async function POST({ request }) {
   try {
     const {
       "your-name": name,
       "your-email": email,
       "your-message": message,
       honeypot,
-    } = await req.json();
+    } = await request.json();
 
     // Check honeypot field
     if (honeypot) {
