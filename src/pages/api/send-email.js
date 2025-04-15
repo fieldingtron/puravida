@@ -42,7 +42,7 @@ export default async function handler(req) {
 
     await resend.emails.send({
       from: "no-reply@fieldsmarshall.com",
-      to: "contact@fieldsmarshall.com",
+      to: "fields.marshall@gmail.com",
       subject: `New Contact Form Submission from ${name}`,
       html: `<p><strong>Name:</strong> ${name}</p><p><strong>Email:</strong> ${email}</p><p><strong>Message:</strong> ${message}</p>`,
     });
