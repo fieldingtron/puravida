@@ -1,0 +1,12 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+main section:nth-child(odd) {
+    @apply   bg-gray-100 text-gray-800 dark:bg-darkBlue1 dark:text-white;
+}
+
+main section:nth-child(even) {
+    @apply   bg-white text-gray-800 dark:bg-darkBlue2 dark:text-white;
+}

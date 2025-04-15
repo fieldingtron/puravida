@@ -1,0 +1,134 @@
+---
+import * as Content from "../content/index.mdx";
+const tripEntries = await import.meta.glob("../content/trips/*.mdx", {
+  eager: true,
+});
+
+interface TripFrontmatter {
+  name: string;
+  slug: string;
+  dates: string;
+  description: string;
+  imgSrc: string | string[];
+  price: string;
+  additionalDetails?: string[];
+}
+
+const trips = Object.values(tripEntries).map((mod: any) => mod.frontmatter as TripFrontmatter);
+---
+
+<section
+  id="trips"
+  class="py-4 bg-fixed bg-no-repeat bg-right-bottom md:bg-martin-pescador capitalize"
+>
+  <div class="container mx-auto px-4 mt-12">
+    <div class="text-center mb-12">
+      <h2 class="text-4xl font-bold capitalize" data-aos="slide-up">
+        Our Trips Overview
+      </h2>
+      <p
+        class="capitalize text-lg mt-4"
+        data-aos="slide-up"
+        data-aos-delay="50"
+      >
+        Explore our exciting range of trips.
+      </p>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-1 gap-8">
+      {
+        trips.map((trip) => (
+          <a href={`/trips/${trip.slug}`}>
+            <div class="group relative bg-white rounded-lg shadow-lg transition-shadow duration-300 hover:shadow-2xl dark:bg-gray-900 flex flex-col md:flex-row h-full mx-10">
+              <div class="relative w-full md:w-1/2 h-64 md:h-auto overflow-hidden image-slider" data-images={Array.isArray(trip.imgSrc) ? JSON.stringify(trip.imgSrc) : JSON.stringify([trip.imgSrc])}>
+                <img
+                  src={Array.isArray(trip.imgSrc) ? trip.imgSrc[0] : trip.imgSrc}
+                  alt={trip.description}
+                  class="object-cover w-full h-full slider-image"
+                />
+              </div>
+              <div class="p-6 flex flex-col w-full md:w-1/2">
+                <h3 class="text-xl xl:text-3xl font-bold mb-2 xl:mb-4 group-hover:text-green-500 capitalize">
+                  {trip.name}
+                </h3>
+                <p class="mb-2 xl:mb-4">
+                  <strong>Dates:</strong> {trip.dates}
+                </p>
+                <p class="mb-2 xl:mb-4 xl:text-lg">{trip.description}</p>
+
+                {/* Additional Details */}
+                {trip.additionalDetails &&
+                  trip.additionalDetails.length > 0 && (
+                    <ul class="mt-2 text-gray-700 dark:text-gray-300 text-sm xl:text-lg list-disc list-inside">
+                      {trip.additionalDetails.map((detail: string, i: number) => (
+                        <li class="mb-1">
+                          {detail}
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+
+                <div class="mt-auto">
+                  <p class="font-bold text-lg xl:text-3xl">{trip.price}</p>
+                  <p class="text-gray-500">Click for more info</p>
+                </div>
+              </div>
+            </div>
+          </a>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const sliders = document.querySelectorAll('.image-slider');
+    
+    sliders.forEach(slider => {
+      const imagesData = slider.getAttribute('data-images');
+      if (!imagesData) return;
+      
+      const images = JSON.parse(imagesData) as string[];
+      if (!images.length) return;
+      
+      const imgElement = slider.querySelector('.slider-image') as HTMLImageElement;
+      if (!imgElement) return;
+      
+      let currentIndex = 0;
+      let sliderInterval: number | null = null;
+      
+      // Preload all images
+      const preloadImages = () => {
+        images.forEach((src: string) => {
+          const img = new Image();
+          img.src = src;
+        });
+      };
+      
+      // Preload images after a short delay to not block initial page rendering
+      setTimeout(preloadImages, 100);
+      
+      // Start slider on hover
+      slider.addEventListener('mouseenter', () => {
+        if (images.length <= 1) return; // Don't start if only one image
+        
+        sliderInterval = setInterval(() => {
+          currentIndex = (currentIndex + 1) % images.length;
+          imgElement.src = images[currentIndex];
+        }, 1000) as unknown as number; // Change every 1 second
+      });
+      
+      // Stop slider when mouse leaves
+      slider.addEventListener('mouseleave', () => {
+        if (sliderInterval) {
+          clearInterval(sliderInterval);
+          sliderInterval = null;
+          
+          // Reset to first image
+          currentIndex = 0;
+          imgElement.src = images[0];
+        }
+      });
+    });
+  });
+</script>
