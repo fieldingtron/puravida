@@ -7,6 +7,13 @@ export const config = {
 };
 
 export default async function handler(req) {
+  if (req.method === "GET") {
+    return new Response(JSON.stringify({ message: "Too high" }), {
+      status: 200,
+      headers: { "Content-Type": "application/json" },
+    });
+  }
+
   if (req.method !== "POST") {
     return new Response(JSON.stringify({ message: "Method not allowed" }), {
       status: 405,

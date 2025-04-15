@@ -1,5 +1,0 @@
-{
-  "rewrites": [
-    { "source": "/api/send-email", "destination": "/src/pages/api/send-email.js" }
-  ]
-}
