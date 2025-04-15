@@ -9,15 +9,12 @@ import DarkModeToggle from "./DarkModeToggle.astro";
     <div class="flex items-center">
       <!-- Logo -->
       <img
-        src="/favicon-96x96.png"
+        src="/puravidalogo.png"
         alt={`${siteName} Logo`}
-        class="h-12 w-12 dark:hidden"
+        class="absolute h-20 w-auto -top-4 "
+        style="z-index: 1;"
       />
-      <img
-        src="/favicon-dark-96x96.png"
-        alt={`${siteName} Logo Dark`}
-        class="h-12 w-12 hidden dark:block"
-      />
+       
       <a
         href="/"
         class="mx-4 text-lg font-bold text-gray-800 dark:text-white uppercase"
