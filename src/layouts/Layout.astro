@@ -9,6 +9,8 @@ import Footer from "../components/Footer.astro";
 import NavBar from "../components/NavBar.astro";
 import "../styles/global.css";
 import "aos/dist/aos.css";
+import Analytics from '@vercel/analytics/astro';
+
 ---
 
 <!doctype html>
@@ -36,6 +38,8 @@ import "aos/dist/aos.css";
       href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap"
       rel="stylesheet"
     />
+    <Analytics />
+
   </head>
   <body
     class="bg-darkBlue text-white font-poppins"
