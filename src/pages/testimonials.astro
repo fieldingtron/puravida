@@ -15,27 +15,10 @@ const seo = {
   description: "Read what our customers have to say about their experiences with Pura Vida Expediciones.",
 };
 
-const testimonials = [
-  {
-    image: '/public/img/testimonial1.jpg',
-    name: 'John Doe',
-    location: 'New York, USA',
-    quote: "This was the best experience of my life!"
-     
-  },
-  {
-    image: '/public/img/testimonial2.jpg',
-    name: 'Jane Smith',
-    location: 'London, UK',
-      quote: "This was the best experience of my life!"
-  }
-];
-
-
 ---
 
 <Layout siteName="Pura Vida Expediciones" seo={seo}>
-  <TestimonialsComponent testimonials={testimonials} />
+  <TestimonialsComponent/>
   <Photos />
   <FAQ />
   <Contact />

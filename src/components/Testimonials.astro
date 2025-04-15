@@ -1,12 +1,23 @@
 ---
-const props = Astro.props || {};
-console.log('Props passed to Testimonials component:', props);
-const testimonials = props.testimonials || [
+// Define testimonials directly in the component
+const testimonials = [
   {
-    image: '/public/img/default.jpg',
-    name: 'Default Name',
-    location: 'Default Location',
-    quote: 'Default quote.'
+    name: "Sarah Johnson",
+    quote: "Our Futaleufú expedition was the adventure of a lifetime! The guides were incredibly knowledgeable and safety-conscious while ensuring we had an absolute blast on the water. The stunning scenery of Patagonia combined with world-class rapids made for an unforgettable experience.",
+    image: "/img/futa7.webp",
+    location: "Colorado, USA"
+  },
+  {
+    name: "Miguel Hernandez",
+    quote: "The Tambopata jungle expedition exceeded all expectations. We spotted incredible wildlife including macaws, capybaras and even a jaguar! The guides' expertise made us feel safe throughout the journey, and the overnight camping along the riverbanks under the stars was magical.",
+    image: "/img/tambopata7.webp",
+    location: "Barcelona, Spain"
+  },
+  {
+    name: "James Wilson",
+    quote: "Rafting the Cotahuasi Canyon was exhilarating! The Class IV-V rapids provided the perfect challenge, and the ancient Inca ruins along the way were fascinating. Pura Vida's attention to detail from equipment to meals was outstanding - I've already booked my next trip with them!",
+    image: "/img/gallery3.jpg",
+    location: "Vancouver, Canada"
   }
 ];
 ---
@@ -20,23 +31,46 @@ const testimonials = props.testimonials || [
       Testimonials
     </h2>
 
-    <div class="relative max-w-3xl mx-auto" id="testimonial-display">
+    <div class="relative max-w-4xl mx-auto" id="testimonial-display">
+      <!-- Left Arrow -->
+      <button 
+        id="prev-testimonial" 
+        class="absolute left-0 top-1/2 transform -translate-y-1/2 bg-white/70 dark:bg-gray-800/70 rounded-full p-2 shadow-md hover:bg-white dark:hover:bg-gray-800 transition-colors z-10"
+        aria-label="Previous testimonial"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+        </svg>
+      </button>
+      
       <img
         id="testimonial-image"
         src={testimonials[0].image}
         alt={testimonials[0].name}
-        class="w-64 h-64 mx-auto rounded-full border-4 border-blue-500"
+        class="w-[22rem] h-[22rem] mx-auto rounded-full border-4 border-blue-500 object-cover shadow-lg"
       />
+      
+      <!-- Right Arrow -->
+      <button 
+        id="next-testimonial" 
+        class="absolute right-0 top-1/2 transform -translate-y-1/2 bg-white/70 dark:bg-gray-800/70 rounded-full p-2 shadow-md hover:bg-white dark:hover:bg-gray-800 transition-colors z-10"
+        aria-label="Next testimonial"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+        </svg>
+      </button>
+      
       <blockquote
         id="testimonial-quote"
-        class="text-lg italic text-gray-700 dark:text-gray-300 mt-4"
+        class="text-lg italic text-gray-700 dark:text-gray-300 mt-6 mx-auto max-w-2xl"
       >
         &ldquo;{testimonials[0].quote}&rdquo;
       </blockquote>
       <div class="mt-4">
         <p
           id="testimonial-name"
-          class="text-lg font-semibold text-gray-900 dark:text-gray-100"
+          class="text-xl font-semibold text-gray-900 dark:text-gray-100"
         >
           {testimonials[0].name}
         </p>
@@ -60,22 +94,26 @@ const testimonials = props.testimonials || [
     </div>
   </div>
 
-  <script type="module">
-    const testimonials = JSON.parse(`{JSON.stringify(testimonials)}`);
+  <script define:vars={{ testimonials }}>
+    // Use the testimonials data passed from the component
+    const testimonialsData = testimonials;
+     
     let currentIndex = 0;
     const image = document.getElementById("testimonial-image");
     const quote = document.getElementById("testimonial-quote");
     const name = document.getElementById("testimonial-name");
     const location = document.getElementById("testimonial-location");
     const buttons = document.querySelectorAll("button[data-index]");
+    const prevButton = document.getElementById("prev-testimonial");
+    const nextButton = document.getElementById("next-testimonial");
 
     function updateDisplay(index) {
-      const t = testimonials[index];
-      image.src = t.image;
-      image.alt = t.name;
-      quote.innerHTML = `&ldquo;${t.quote}&rdquo;`;
-      name.textContent = t.name;
-      location.textContent = t.location;
+      const t = testimonialsData[index];
+      if (image) image.src = t.image;
+      if (image) image.alt = t.name;
+      if (quote) quote.innerHTML = `&ldquo;${t.quote}&rdquo;`;
+      if (name) name.textContent = t.name;
+      if (location) location.textContent = t.location;
 
       buttons.forEach((btn, i) => {
         btn.classList.toggle("bg-blue-500", i === index);
@@ -86,15 +124,37 @@ const testimonials = props.testimonials || [
       currentIndex = index;
     }
 
+    // Handle dot indicator clicks
     buttons.forEach((btn) => {
       btn.addEventListener("click", () => {
         updateDisplay(parseInt(btn.dataset.index));
       });
     });
 
-    setInterval(() => {
-      const nextIndex = (currentIndex + 1) % testimonials.length;
+    // Handle arrow button clicks
+    if (prevButton) {
+      prevButton.addEventListener("click", () => {
+        const newIndex = (currentIndex - 1 + testimonialsData.length) % testimonialsData.length;
+        updateDisplay(newIndex);
+      });
+    }
+
+    if (nextButton) {
+      nextButton.addEventListener("click", () => {
+        const newIndex = (currentIndex + 1) % testimonialsData.length;
+        updateDisplay(newIndex);
+      });
+    }
+
+    // Start the automatic cycling
+    const intervalId = setInterval(() => {
+      const nextIndex = (currentIndex + 1) % testimonialsData.length;
       updateDisplay(nextIndex);
-    }, 4000);
+    }, 6000); // Increased to 6 seconds to give more time to read longer testimonials
+
+    // Clean up the interval when navigating away
+    document.addEventListener("astro:before-swap", () => {
+      clearInterval(intervalId);
+    });
   </script>
 </section>
