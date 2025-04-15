@@ -46,6 +46,16 @@
               class="block w-full mt-1 p-2 px-3 border-gray-300 rounded-md shadow-sm dark:text-white dark:bg-darkGrayishBlue"
               placeholder="Tell us what you're thinking..."></textarea>
           </label>
+          <label class="hidden">
+            <span>Leave this field empty</span>
+            <input
+              type="text"
+              name="honeypot"
+              tabindex="-1"
+              autocomplete="off"
+              class="hidden"
+            />
+          </label>
           <div class="mb-2">
             <button
               type="submit"
@@ -61,9 +71,6 @@
 </section>
 <script>
   console.log("Script Loaded");
-
-  const EMAIL_URL =
-    "https://contemplative.dreamhosters.com/wp-json/contact-form-7/v1/contact-forms/343/feedback";
 
   const contactform = {
     sent: "Message Sent!",
@@ -81,10 +88,6 @@
     const form = event.target;
     const formData = new FormData(form);
 
-    // Add any required hidden fields
-    formData.append("_wpcf7", "343");
-    formData.append("_wpcf7_unit_tag", "e73e2f6");
-
     const submitButton = form.querySelector('button[type="submit"]');
     submitButton.disabled = true;
     submitButton.textContent = "Submitting...";
@@ -94,21 +97,19 @@
       console.log(`${key}: ${value}`);
     }
 
-    // Submit the form
-    fetch(EMAIL_URL, {
+    // Submit the form to the Vercel Edge Function
+    fetch("/api/send-email", {
       method: "POST",
-      body: formData,
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(Object.fromEntries(formData)),
     })
       .then(async (response) => {
-        // Parse the response as JSON
-        const data = await response.json();
-        console.log("Parsed Response:", data);
-
-        if (!response.ok || data.status !== "mail_sent") {
+        if (!response.ok) {
           // Handle errors based on response
-          throw new Error(
-            data.message || `HTTP error! status: ${response.status}`
-          );
+          const errorData = await response.json();
+          throw new Error(errorData.message || `HTTP error! status: ${response.status}`);
         }
 
         // Success: Show the success message and reset the form
