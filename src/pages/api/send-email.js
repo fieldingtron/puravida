@@ -6,13 +6,6 @@ export const config = {
   runtime: "edge",
 };
 
-export async function GET() {
-  return new Response(JSON.stringify({ message: "Too high" }), {
-    status: 200,
-    headers: { "Content-Type": "application/json" },
-  });
-}
-
 export async function POST({ request }) {
   try {
     const {
