@@ -6,7 +6,7 @@ export default {
   siteLogo: "/images/logo.png",
   siteImage: "/images/hero.jpg",
   meta: {
-    description: "Explore the great outdoors with Wilderness Connections.",
+    description: "Explore the great outdoors with Pura Vida Expediciones.",
     keywords: "adventure, outdoors, trips, nature",
   },
   navigation: [

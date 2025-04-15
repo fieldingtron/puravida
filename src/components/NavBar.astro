@@ -1,7 +1,8 @@
 ---
 import siteConfig from '../config/siteConfig.js';
 const { siteName } = siteConfig;
-import DarkModeToggle from "./DarkModeToggle.astro";
+// Commented out dark mode toggle import
+// import DarkModeToggle from "./DarkModeToggle.astro";
 ---
 
 <header class="bg-white dark:bg-gray-900 shadow-md w-full z-50">
@@ -63,9 +64,11 @@ import DarkModeToggle from "./DarkModeToggle.astro";
           </a>
         </li>
       ))}
+      <!-- Commented out dark mode toggle
       <li class="flex justify-center items-center">
         <DarkModeToggle />
       </li>
+      -->
     </ul>
   </nav>
 </header>

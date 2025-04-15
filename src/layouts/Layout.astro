@@ -12,8 +12,17 @@ import "aos/dist/aos.css";
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="en" class="dark">
   <head>
+    <!-- Prevent flash of light mode -->
+    <script>
+      // This script runs immediately and ensures dark mode is applied
+      // before any content renders
+      (function() {
+        document.documentElement.classList.add('dark');
+        localStorage.setItem('theme', 'dark');
+      })();
+    </script>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{siteName}</title>
@@ -21,16 +30,15 @@ import "aos/dist/aos.css";
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="shortcut icon" href="/favicon.ico" />
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-    <meta name="apple-mobile-web-app-title" content="WildernessReflections" />
+    <meta name="apple-mobile-web-app-title" content="PuraVidaExpediciones" />
     <link rel="manifest" href="/site.webmanifest" />
     <link
       href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap"
       rel="stylesheet"
     />
-    <meta name="robots" content="noindex" />
   </head>
   <body
-    class="dark:bg-darkBlue dark:text-white text-gray-800 bg-white font-poppins"
+    class="bg-darkBlue text-white font-poppins"
   >
     <NavBar siteName={siteName} />
     <main>
