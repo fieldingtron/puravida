@@ -15,10 +15,16 @@ const images = [
 ];
 ---
 
+<!-- Preload hero slider images -->
+<link rel="preload" href={images[0]} as="image" type="image/avif" fetchpriority="high" />
+{images.slice(1).map((image) => (
+  <link rel="preload" href={image} as="image" type="image/avif" fetchpriority="low" />
+))}
+
 <section
   id="home"
   class="relative min-h-[80vh] flex items-center justify-center bg-cover bg-center bg-no-repeat"
-  style={`background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('${props.landingImageSrc}')`}
+  style={`background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('${images[0]}')`}
 >
   <!-- Left Arrow -->
   <button
@@ -109,6 +115,19 @@ const images = [
   const dots = document.querySelectorAll(".dot");
   let currentIndex = 0;
   let intervalId;
+  let preloadedImages = [];
+
+  // Function to preload all images
+  const preloadImages = () => {
+    images.forEach((src, index) => {
+      const img = new Image();
+      img.src = src;
+      img.onload = () => {
+        preloadedImages[index] = true;
+        console.log(`Preloaded image ${index + 1}/${images.length}`);
+      };
+    });
+  };
 
   // Function to update the background image and active dot
   const updateBackground = () => {
@@ -163,4 +182,14 @@ const images = [
   // Initialize the carousel
   updateBackground(); // Set initial background and dot
   startAutoAdvance(); // Start auto-advance
+
+  // Use requestIdleCallback or setTimeout to preload images after page load
+  if ('requestIdleCallback' in window) {
+    requestIdleCallback(() => {
+      preloadImages();
+    }, { timeout: 2000 });
+  } else {
+    // Fallback for browsers that don't support requestIdleCallback
+    setTimeout(preloadImages, 1000);
+  }
 </script>

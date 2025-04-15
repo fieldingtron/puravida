@@ -1,0 +1,42 @@
+---
+// This is a simple Testimonial component to display testimonials.
+const testimonials = [
+  {
+    name: "John Doe",
+    feedback: "Amazing experience! Highly recommend it.",
+    image: "/img/gallery1.jpg",
+  },
+  {
+    name: "Jane Smith",
+    feedback: "A trip of a lifetime. The guides were fantastic!",
+    image: "/img/gallery2.jpg",
+  },
+];
+---
+
+<div class="testimonials">
+  {testimonials.map((testimonial) => (
+    <div class="testimonial" key={testimonial.name}>
+      <img src={testimonial.image} alt={testimonial.name} />
+      <h3>{testimonial.name}</h3>
+      <p>{testimonial.feedback}</p>
+    </div>
+  ))}
+</div>
+
+<style>
+  .testimonials {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  .testimonial {
+    border: 1px solid #ccc;
+    padding: 1rem;
+    border-radius: 8px;
+  }
+  .testimonial img {
+    max-width: 100px;
+    border-radius: 50%;
+  }
+</style>
