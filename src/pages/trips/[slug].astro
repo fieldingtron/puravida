@@ -29,9 +29,13 @@ if (!trip) {
   throw new Error("Trip not found");
 }
 
+// Get the first image from the trip's image array or use the single image
+const socialImage = Array.isArray(trip.imgSrc) ? trip.imgSrc[0] : trip.imgSrc;
+
 const seo = {
   title: trip.title + " - Pura Vida Expediciones",
   description: trip.description,
+  image: socialImage // Use the trip's first image for social sharing
 };
 ---
 
@@ -52,6 +56,8 @@ const seo = {
                       src={src}
                       alt={`${trip.name} - Image ${index + 1}`}
                       class="absolute inset-0 w-full h-full object-cover"
+                      loading={index === 0 ? "eager" : "lazy"}
+                      decoding={index === 0 ? "sync" : "async"}
                     />
                   </div>
                 </div>

@@ -1,0 +1,10 @@
+User-agent: *
+Allow: /
+
+# Allow all bots to access all content
+# Block access to non-public parts of the site if they exist in future
+# Disallow: /admin/
+# Disallow: /private/
+
+# Specify sitemap location
+Sitemap: https://puravidaexpediciones.com/sitemap.xml

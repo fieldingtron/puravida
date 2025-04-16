@@ -5,9 +5,7 @@ SEO title and meta tags and descriptions
 
 Here's a **basic SEO on-site checklist** you can use as a quick reference — perfect for making sure your site covers the essentials:
 
----
-
-testiomonials
+https://pagespeed.web.dev/analysis/https-puravidaexpediciones-com/6imzlsybeb?form_factor=mobile
 
 ## ✅ Basic On-Site SEO Checklist
 
@@ -70,4 +68,39 @@ testiomonials
 
 ---
 
-Want this as a downloadable PDF or editable Google Doc? I can generate that too!
+## 🚀 Future Page Speed Enhancements
+
+We've already implemented several page speed optimizations including:
+- Preloading of critical images
+- Optimized font loading
+- Conditional AOS animations for mobile/desktop
+- Resource hints (preconnect, dns-prefetch)
+- Long-term caching headers for static assets
+- Lazy loading for non-critical images
+
+### Additional optimizations to consider:
+
+#### Image Optimizations
+- [ ] Implement responsive images with `srcset` and `sizes` attributes
+- [ ] Convert remaining JPG/PNG images to WebP or AVIF formats
+- [ ] Consider using Astro's built-in image optimization components
+- [ ] Add width and height attributes to all images to prevent layout shifts
+
+#### Performance Monitoring
+- [ ] Set up Core Web Vitals monitoring in Google Search Console
+- [ ] Implement Real User Monitoring (RUM) to track actual user experiences
+- [ ] Create performance budgets for key metrics (LCP, FID, CLS)
+
+#### Advanced Techniques
+- [ ] Implement Intersection Observer API for more precise lazy loading
+- [ ] Consider partial hydration for interactive components
+- [ ] Explore edge caching solutions for dynamic content
+- [ ] Implement critical CSS extraction for above-the-fold content
+
+#### Server Optimizations
+- [ ] Enable Brotli compression for text-based resources
+- [ ] Implement HTTP/2 or HTTP/3 for multiplexed connections
+- [ ] Consider edge functions for personalized content delivery
+- [ ] Use stale-while-revalidate caching strategies for API responses
+
+---

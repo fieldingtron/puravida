@@ -10,3 +10,23 @@ main section:nth-child(odd) {
 main section:nth-child(even) {
     @apply   bg-white text-gray-800 dark:bg-darkBlue2 dark:text-white;
 }
+
+/* Mobile-only simple animation fallbacks (for when AOS is not loaded) */
+@media (max-width: 640px) {
+  .mobile-animated {
+    animation: simpleFadeIn 0.6s ease-out;
+  }
+  
+  @keyframes simpleFadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
+
+/* Add your custom styles below */

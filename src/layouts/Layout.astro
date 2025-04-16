@@ -4,6 +4,7 @@ export interface Props {
   seo?: {
     title: string;
     description: string;
+    image?: string;
   };
 }
 import siteConfig from '../config/siteConfig.js';
@@ -18,6 +19,13 @@ import Analytics from '@vercel/analytics/astro';
 const { seo } = Astro.props;
 const pageTitle = seo?.title || siteName;
 const pageDescription = seo?.description || siteConfig.siteDescription;
+
+// Get the current URL for canonical tag
+const canonicalURL = new URL(Astro.url.pathname, Astro.site || 'https://puravidaexpediciones.com').href;
+
+// Default image for Open Graph (social sharing)
+const defaultOgImage = new URL('/puravidalogo.png', Astro.site || 'https://puravidaexpediciones.com').href;
+const ogImage = seo?.image ? new URL(seo.image, Astro.site || 'https://puravidaexpediciones.com').href : defaultOgImage;
 ---
 
 <!doctype html>
@@ -36,6 +44,66 @@ const pageDescription = seo?.description || siteConfig.siteDescription;
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{pageTitle}</title>
     <meta name="description" content={pageDescription} />
+    
+    <!-- Resource hints for performance -->
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    
+    <!-- Canonical tag to prevent duplicate content issues -->
+    <link rel="canonical" href={canonicalURL} />
+    
+    <!-- Third-party script loader helper -->
+    <script type="text/javascript">
+      window.loadScript = function(src, async = true, defer = true) {
+        return new Promise((resolve, reject) => {
+          const script = document.createElement('script');
+          script.src = src;
+          script.async = async;
+          script.defer = defer;
+          script.onload = resolve;
+          script.onerror = reject;
+          document.head.appendChild(script);
+        });
+      };
+    </script>
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={pageDescription} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:alt" content="Pura Vida Expediciones" />
+    <meta property="og:site_name" content={siteName} />
+    <meta property="og:locale" content="en_US" />
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content={canonicalURL} />
+    <meta property="twitter:title" content={pageTitle} />
+    <meta property="twitter:description" content={pageDescription} />
+    <meta property="twitter:image" content={ogImage} />
+    <meta property="twitter:image:alt" content="Pura Vida Expediciones" />
+    
+    <!-- Preload critical images -->
+    <link rel="preload" as="image" href="/img/hero-mountains1.jpg" />
+    
+    <!-- Font display optimization -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap"
+      rel="stylesheet"
+      media="print"
+      onload="this.media='all'"
+    />
+    <!-- Fallback for browsers that don't support JS -->
+    <noscript>
+      <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap"
+        rel="stylesheet"
+      />
+    </noscript>
+    
     <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="shortcut icon" href="/favicon.ico" />
@@ -43,10 +111,6 @@ const pageDescription = seo?.description || siteConfig.siteDescription;
     <meta name="apple-mobile-web-app-title" content="PuraVidaExpediciones" />
     <link rel="manifest" href="/site.webmanifest" />
     
-    <link
-      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap"
-      rel="stylesheet"
-    />
     <Analytics />
 
   </head>
@@ -61,14 +125,24 @@ const pageDescription = seo?.description || siteConfig.siteDescription;
     <Footer />
     <!-- AOS Initialization Script -->
     <script>
+      // Dynamically import AOS library
       document.addEventListener("DOMContentLoaded", () => {
-        import("aos").then((AOS) => {
-          AOS.init({
-            duration: 1000, // Animation duration in milliseconds
-            offset: 120, // Offset from the original trigger point
-            easing: "ease", // Easing function
+        // Only load AOS if the viewport is not small (mobile devices)
+        if (window.innerWidth > 640) {
+          import("aos").then((AOS) => {
+            AOS.init({
+              duration: 800, // Slightly reduced for better performance
+              offset: 120,
+              easing: "ease-out", // Smoother easing
+              once: true, // Only animate elements once
+            });
           });
-        });
+        } else {
+          // For mobile devices, apply a simpler animation using CSS only
+          document.querySelectorAll('[data-aos]').forEach(el => {
+            el.classList.add('mobile-animated');
+          });
+        }
       });
     </script>
   </body>
