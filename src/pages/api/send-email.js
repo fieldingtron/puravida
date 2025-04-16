@@ -34,10 +34,11 @@ export async function POST({ request }) {
     }
 
     await resend.emails.send({
-      from: "no-reply@fieldsmarshall.com",
-      to: "puravidaexpediciones@gmail.com",
+      from: process.env.FROM_EMAIL || "no-reply@onresend.com",
+      to: process.env.TO_EMAIL || "info@puravidaexpediciones.com",
       subject: `Contacto Website de ${name}`,
       html: `<p><strong>Name:</strong> ${name}</p><p><strong>Email:</strong> ${email}</p><p><strong>Message:</strong> ${message}</p>`,
+      text: `Name: ${name}\nEmail: ${email}\nMessage: ${message}`,
     });
 
     return new Response(

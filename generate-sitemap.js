@@ -8,7 +8,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
 // Replace with your actual domain
-const website = "https://puravidaexpediciones.com";
+const website = "https://www.puravidaexpediciones.com";
 
 // Define trips based on image folder names
 function getTrips() {
