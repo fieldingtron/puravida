@@ -1,8 +1,15 @@
 const crypto = require("node:crypto");
 const fs = require("node:fs");
 const readline = require("node:readline");
+// Add dotenv require
+const dotenv = require("dotenv");
 
-// Check if running in production based on // Check if running in production based on CONTEXT or VERCEL_ENV
+// Load environment variables from .env.local if it exists
+if (fs.existsSync(".env")) {
+  dotenv.config({ path: ".env" });
+}
+
+// Check if running in production based on CONTEXT or VERCEL_ENV
 if (
   process.env.VERCEL_ENV?.toLowerCase() === "production" ||
   process.env.CONTEXT?.toLowerCase() === "production"
@@ -23,6 +30,12 @@ console.log(process.env);
 
 // Helper function to prompt for a password
 function promptPassword(question) {
+  // Check if PASSWORD environment variable exists
+  if (process.env.PASSWORD) {
+    console.log("Using password from environment variable");
+    return Promise.resolve(process.env.PASSWORD);
+  }
+
   const rl = readline.createInterface({
     input: process.stdin,
     output: process.stdout,
