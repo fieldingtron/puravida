@@ -71,6 +71,7 @@ https://pagespeed.web.dev/analysis/https-puravidaexpediciones-com/6imzlsybeb?for
 ## 🚀 Future Page Speed Enhancements
 
 We've already implemented several page speed optimizations including:
+
 - Preloading of critical images
 - Optimized font loading
 - Conditional AOS animations for mobile/desktop
@@ -81,23 +82,27 @@ We've already implemented several page speed optimizations including:
 ### Additional optimizations to consider:
 
 #### Image Optimizations
+
 - [ ] Implement responsive images with `srcset` and `sizes` attributes
 - [ ] Convert remaining JPG/PNG images to WebP or AVIF formats
 - [ ] Consider using Astro's built-in image optimization components
 - [ ] Add width and height attributes to all images to prevent layout shifts
 
 #### Performance Monitoring
+
 - [ ] Set up Core Web Vitals monitoring in Google Search Console
 - [ ] Implement Real User Monitoring (RUM) to track actual user experiences
 - [ ] Create performance budgets for key metrics (LCP, FID, CLS)
 
 #### Advanced Techniques
+
 - [ ] Implement Intersection Observer API for more precise lazy loading
 - [ ] Consider partial hydration for interactive components
 - [ ] Explore edge caching solutions for dynamic content
 - [ ] Implement critical CSS extraction for above-the-fold content
 
 #### Server Optimizations
+
 - [ ] Enable Brotli compression for text-based resources
 - [ ] Implement HTTP/2 or HTTP/3 for multiplexed connections
 - [ ] Consider edge functions for personalized content delivery
