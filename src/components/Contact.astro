@@ -56,6 +56,17 @@
               class="hidden"
             />
           </label>
+          <input type="hidden" name="startTime" id="startTime" />
+          <label class="block mb-6">
+            <span>Security Question: What is 3 + 4? <span class="text-red-500">*</span></span>
+            <input
+              name="mathChallenge"
+              type="number"
+              required
+              class="block w-full mt-1 p-2 px-3 border-gray-300 rounded-md shadow-sm dark:text-white dark:bg-darkGrayishBlue"
+              placeholder="Enter the answer"
+            />
+          </label>
             <div class="mb-2 flex justify-between">
             <button
               type="submit"
@@ -86,6 +97,14 @@
 <script>
   console.log("Script Loaded");
 
+  // Set the start time when the page loads for time-based bot detection
+  document.addEventListener("DOMContentLoaded", function () {
+    const startTimeInput = document.getElementById("startTime");
+    if (startTimeInput) {
+      startTimeInput.value = Date.now().toString();
+    }
+  });
+
   const contactform = {
     sent: "Message Sent!",
     sendMessage: "Send Message",
@@ -101,10 +120,49 @@
     // Get the form and button
     const form = event.target;
     const formData = new FormData(form);
+    const data = Object.fromEntries(formData);
 
     const submitButton = form.querySelector('button[type="submit"]');
     submitButton.disabled = true;
     submitButton.textContent = "Submitting...";
+
+    const responseMessage = document.getElementById("response-message");
+
+    // 1. Time-based Bot Check (Fast Submit)
+    if (data.startTime) {
+      const timeElapsed = Date.now() - parseInt(data.startTime, 10);
+      if (timeElapsed < 3000) {
+        responseMessage.textContent = "Form submitted too quickly. Please take your time and try again.";
+        submitButton.disabled = false;
+        submitButton.textContent = contactform.sendMessage;
+        return;
+      }
+    }
+
+    // 2. Honeypot check
+    if (data.honeypot && data.honeypot.trim() !== "") {
+      console.warn("[Form] Spam detected by honeypot field.");
+      responseMessage.textContent = contactform.sent;
+      form.reset();
+      return;
+    }
+
+    // 3. Math Challenge client-side verification
+    if (parseInt(data.mathChallenge, 10) !== 7) {
+      responseMessage.textContent = "Incorrect answer to the security question.";
+      submitButton.disabled = false;
+      submitButton.textContent = contactform.sendMessage;
+      return;
+    }
+
+    // 4. URL Pattern checking in name
+    const urlRegex = /(http:\/\/|https:\/\/|www\.)/i;
+    if (urlRegex.test(data["your-name"])) {
+      responseMessage.textContent = "Invalid characters detected in name field.";
+      submitButton.disabled = false;
+      submitButton.textContent = contactform.sendMessage;
+      return;
+    }
 
     console.log("FormData Entries:");
     for (let [key, value] of formData.entries()) {
@@ -117,7 +175,7 @@
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(Object.fromEntries(formData)),
+      body: JSON.stringify(data),
     })
       .then(async (response) => {
         if (!response.ok) {
@@ -128,15 +186,13 @@
 
         // Success: Show the success message and reset the form
         console.log("Form successfully submitted");
-        document.getElementById("response-message").textContent =
-          contactform.sent;
+        responseMessage.textContent = contactform.sent;
         form.reset();
       })
       .catch((error) => {
         // Handle and display errors
         console.error("Error during form submission:", error);
-        document.getElementById("response-message").textContent =
-          contactform.errorMessage;
+        responseMessage.textContent = contactform.errorMessage;
       })
       .finally(() => {
         // Re-enable the submit button
